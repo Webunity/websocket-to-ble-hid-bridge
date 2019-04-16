@@ -1,0 +1,34 @@
+body {
+	background-color: #789; margin: 0;
+	padding: 0; font: 14px Helvetica, Arial, sans-serif;
+}
+
+div.content {
+	width: 800px;
+	margin: 2em auto;
+	padding: 20px 50px;
+	background-color: #fff;
+}
+
+label {
+	font-weight: bold;
+}
+
+#messages {
+	font-family: Monospace;
+	border: 1px solid #999;
+	height: 20em;
+	overflow: scroll;
+	padding: 0.5em 0.35em;
+	margin-top: 0.5em;
+}
+
+a:link, a:visited { color: #69c; text-decoration: none; }
+
+@media (max-width: 700px) {
+	body { background-color: #fff; }
+	div.content {
+		width: auto; margin: 0 auto; border-radius: 0;
+		padding: 1em;
+	}
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Bluetooth HID peripheral - Websocket server log</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+	<div class="content">
+		<h1>Bluetooth HID peripheral - Websocket server log</h1>
+
+		<strong>Message log:</strong><br />
+		<div id="messages">
+		</div>
+
+		<div style="margin-top: 0.5em">
+
+			<div style="float: left;">
+				<label for="send_modifier_keycode">Send a modifier &amp; keycode:</label><br />
+				<input type="text" id="send_modifier_keycode" maxlength="7" />
+				<button id="send_modifier_keycode_button">Send</button>
+			</div>
+			<div style="float: right;">
+				<label for="send_string">Send a text:</label><br />
+				<input type="text" id="send_string" />
+				<button id="send_string_button">Send</button>
+			</div>
+			<br  style="clear: both;" />
+		</div>
+	</div>
+
+	<script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script language="javascript" type="text/javascript">
+		var ws;
+		var maxDelay = 2000;
+		var retries = 0;
+
+		function connect() {
+			ws = new WebSocket('ws://' + location.host + '/ws');
+
+			ws.onopen = function(ev) {
+				retries++;
+			};
+
+			ws.onmessage = function(msg) {
+				$('#messages').append('<div>' + msg.data + '</div>').scrollTop($('#messages')[0].scrollHeight);
+			};
+
+			ws.onerror = function(ev) {
+				ws.close();
+			};
+
+			ws.onclose = function(ev) {
+				if ((ev.code == 1006) || (ev.code == 4000)) {
+					var delay = 100 * Math.pow(1.5, retries);
+					delay = (delay > maxDelay) ? maxDelay : delay;
+
+                    setTimeout(function() {
+                    	connect();
+                    }, delay);
+				} else {
+					console.log(ev);
+				}
+			};
+		}
+
+		$(function () {
+			$('#send_modifier_keycode').keypress(function(event){
+				var keycode = (event.keyCode ? event.keyCode : event.which);
+				if (keycode == '13') {
+					$('#send_modifier_keycode_button').trigger('click');
+				}
+			});
+
+			$('#send_modifier_keycode_button').click(function() {
+				ws.send($('#send_modifier_keycode').val());
+				$('#send_modifier_keycode').val('').focus();
+			});
+
+			$('#send_string').keypress(function(event){
+				var keycode = (event.keyCode ? event.keyCode : event.which);
+				if (keycode == '13') {
+					$('#send_string_button').trigger('click');
+				}
+			});
+
+			$('#send_string_button').click(function() {
+				var string = $('#send_string').val();
+				for (var i = 0; i < string.length; i++) {
+					ws.send(string.charAt(i));
+				}
+				$('#send_string').val('').focus();
+			});
+
+			connect();
+		});
+	</script>
+</body>
+</html>
