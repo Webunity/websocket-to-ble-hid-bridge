@@ -2,9 +2,7 @@
 This is a bluetooth peripheral which acts as a 'keyboard' using a plugged in bluetooth USB adapter. It can be used for example to control [using my NVidia Shield driver](https://github.com/Webunity/neeo-driver-nvidia-shield) for the Neeo remote.
 Please make sure you have a Bluetooth hardware dongle attached to your Raspberry Pi before attempting to install/run this driver.
 
-<p align="center">
-	![how-it-works](./assets/websocket-to-ble-hid-bridge.png?raw=true)
-</p>
+![how-it-works](./assets/websocket-to-ble-hid-bridge.png?raw=true)
   
 > This is a 'works-on-my-machine' repository; i really don't have time to support 'compile' issues.
 
