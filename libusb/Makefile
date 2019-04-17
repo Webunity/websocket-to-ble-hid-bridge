@@ -1,6 +1,6 @@
 # Settings
-BTSTACK_DIR = ./assets/btstack/port/libusb
-MONGOOSE_DIR = ./assets/mongoose
+BTSTACK_DIR = ../assets/btstack/port/libusb
+MONGOOSE_DIR = ../assets/mongoose
 
 .DEFAULT_GOAL := websocket-to-ble-hid-bridge
 
