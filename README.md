@@ -1,6 +1,9 @@
 # Websocket-to-ble-hid-bridge
 This is a bluetooth peripheral which acts as a 'keyboard' using a plugged in bluetooth USB adapter. It can be used for example to control [using my NVidia Shield driver](https://github.com/Webunity/neeo-driver-nvidia-shield) for the Neeo remote.
+
 Please make sure you have a Bluetooth hardware dongle attached to your Raspberry Pi before attempting to install/run this driver.
+  
+> This is a 'works-on-my-machine' repository; i really don't have time to support 'compile' issues.
 
 # Todo
 - Add script to launch peripheral on boot of Pi
@@ -8,8 +11,8 @@ Please make sure you have a Bluetooth hardware dongle attached to your Raspberry
 
 ## Architecture
 ![how-it-works](./assets/websocket-to-ble-hid-bridge.png?raw=true)
-  
-> This is a 'works-on-my-machine' repository; i really don't have time to support 'compile' issues.
+
+For more details, see the driver which depends on this peripheral.
 
 ## Debug console
 The web_debug folder is served by the websocket webserver, running on the HID peripheral. This page has an auto-reconnecting websocket implementation and 2 possiblities to send data to the peripheral.
