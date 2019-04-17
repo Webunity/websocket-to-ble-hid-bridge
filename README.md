@@ -17,10 +17,6 @@ For more details, see the driver which depends on this peripheral.
 ## Debug console
 The web_debug folder is served by the websocket webserver, running on the HID peripheral. This page has an auto-reconnecting websocket implementation and 2 possiblities to send data to the peripheral.
 
-The peripheral makes use of the the following dependencies:
-- https://github.com/cesanta/mongoose
-- https://github.com/bluekitchen/btstack
-
 > Note: This website uses an external jQuery library, served from a CDN. If you want to run this sample on a device which doesn't have access to the internet, you need to modify the index.html yourself.
 
 ### Option 1 - send a modifier and keycode.
@@ -41,3 +37,10 @@ As an alternative, keycodes can be found in the sourcecode of the peripheral, e.
 
 ### Option 2 - send a text string
 With the box on the right of the page you can send a string. This is not implemented in the Neeo driver itself but it is supported by the BLE HID peripheral. Each character will be sent 'as-is'; the peripheral finds out which modifier and keycode are needed to be put in the buffer before it is sent to the paired BLE device.
+
+## Dependencies
+The peripheral makes use of the the following dependencies for the libusb version:
+- https://github.com/cesanta/mongoose
+- https://github.com/bluekitchen/btstack
+
+
